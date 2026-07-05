@@ -1,0 +1,9 @@
+# Dev image: runs the Vite dev server with hot reload.
+# New .md files under src/content/** appear automatically — no rebuild needed.
+FROM node:20-alpine
+WORKDIR /app
+COPY package.json ./
+RUN npm install
+COPY . .
+EXPOSE 5173
+CMD ["npm", "run", "dev", "--", "--host"]
