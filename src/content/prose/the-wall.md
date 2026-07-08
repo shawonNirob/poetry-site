@@ -1,5 +1,5 @@
 ---
-title: দেয়াল (The Wall)
+title: দেয়াল
 date: 2026-03-03
 excerpt: A wall that is neither door nor ruin, only the hinge everything turns on.
 ---

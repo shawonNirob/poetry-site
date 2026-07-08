@@ -4,16 +4,16 @@
   --surface: #081420;
   --surface-raised: #0c1c2c;
   --line: #13273a;
-  --line-glow: rgba(80, 209, 255, 0.22);
+  --line-glow: rgba(46, 134, 201, 0.22);
 
   --ink: #eaf4fb;
   --ink-muted: #7fa0b8;
   --ink-faint: #43617a;
 
-  --glow: #4fd1ff;
-  --glow-bright: #a9ecff;
-  --glow-soft: #1c85b8;
-  --glow-dim: #103449;
+  --glow: #2e86c9;
+  --glow-bright: #a9e0ff;
+  --glow-soft: #155f8f;
+  --glow-dim: #0b2c47;
 
   --font-display: 'Newsreader', Georgia, serif;
   --font-body: 'Inter', system-ui, sans-serif;
@@ -29,14 +29,14 @@
 html, body {
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 
 body {
+  position: relative;
   background: var(--bg-deep);
   background-image:
-    radial-gradient(ellipse 1000px 600px at 12% -12%, rgba(79, 209, 255, 0.16), transparent 60%),
-    radial-gradient(ellipse 800px 600px at 105% 8%, rgba(28, 133, 184, 0.14), transparent 55%),
-    radial-gradient(ellipse 700px 500px at 50% 115%, rgba(79, 209, 255, 0.08), transparent 60%),
+    radial-gradient(ellipse 1100px 650px at 50% -15%, rgba(90, 170, 220, 0.14), transparent 60%),
     linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
   background-attachment: fixed;
   color: var(--ink);
@@ -44,7 +44,81 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* ---------- soft blue cloth, floating and flying slowly across the sky ---------- */
+
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  pointer-events: none;
+  z-index: 0;
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+
+body::before {
+  top: 8%;
+  left: -30%;
+  width: 170%;
+  height: 24vh;
+  background: repeating-linear-gradient(
+    100deg,
+    rgba(4, 26, 48, 0.36) 0%,
+    rgba(46, 134, 201, 0.3) 14%,
+    rgba(140, 200, 235, 0.22) 28%,
+    rgba(9, 52, 88, 0.32) 42%,
+    rgba(46, 134, 201, 0.26) 56%
+  );
+  border-radius: 50%;
+  filter: blur(55px) saturate(120%);
+  opacity: 0.3;
+  animation: cloth-fly-a 210s ease-in-out infinite;
+}
+
+body::after {
+  top: 34%;
+  left: -25%;
+  width: 150%;
+  height: 20vh;
+  background: repeating-linear-gradient(
+    260deg,
+    rgba(9, 46, 78, 0.3) 0%,
+    rgba(46, 134, 201, 0.24) 20%,
+    rgba(140, 200, 235, 0.16) 40%,
+    rgba(9, 46, 78, 0.28) 60%
+  );
+  border-radius: 50%;
+  filter: blur(45px) saturate(120%);
+  opacity: 0.22;
+  animation: cloth-fly-b 260s ease-in-out infinite;
+}
+
+@keyframes cloth-fly-a {
+  0%   { transform: translate(-12%, 0%) rotate(-9deg) skewY(-2deg) scaleY(1); }
+  25%  { transform: translate(-2%, 2%) rotate(-6deg) skewY(1.5deg) scaleY(1.04); }
+  50%  { transform: translate(10%, -1.5%) rotate(-10deg) skewY(-1.5deg) scaleY(0.97); }
+  75%  { transform: translate(2%, 1.5%) rotate(-7deg) skewY(2deg) scaleY(1.03); }
+  100% { transform: translate(-12%, 0%) rotate(-9deg) skewY(-2deg) scaleY(1); }
+}
+
+@keyframes cloth-fly-b {
+  0%   { transform: translate(10%, 0%) rotate(7deg) skewY(2deg) scaleY(1); }
+  25%  { transform: translate(0%, -2%) rotate(9deg) skewY(-1.5deg) scaleY(1.03); }
+  50%  { transform: translate(-10%, 1.5%) rotate(6deg) skewY(2deg) scaleY(0.98); }
+  75%  { transform: translate(-2%, -1.5%) rotate(8deg) skewY(-2deg) scaleY(1.02); }
+  100% { transform: translate(10%, 0%) rotate(7deg) skewY(2deg) scaleY(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before,
+  body::after {
+    animation: none;
+  }
+}
+
 #root {
+  position: relative;
+  z-index: 1;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -63,7 +137,7 @@ a {
 :focus-visible {
   outline: 1px solid var(--glow-bright);
   outline-offset: 3px;
-  box-shadow: 0 0 0 4px rgba(79, 209, 255, 0.18);
+  box-shadow: 0 0 0 4px rgba(46, 134, 201, 0.18);
 }
 
 .container {
@@ -80,9 +154,9 @@ a {
   top: 0;
   z-index: 10;
   padding: 32px 0 22px;
-  background: rgba(2, 5, 11, 0.72);
-  backdrop-filter: blur(14px) saturate(140%);
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  background: rgba(2, 5, 11, 0.5);
+  backdrop-filter: blur(9px) saturate(150%);
+  -webkit-backdrop-filter: blur(9px) saturate(150%);
   border-bottom: 1px solid var(--line);
   box-shadow: 0 1px 0 var(--line-glow);
 }
@@ -99,8 +173,8 @@ a {
   border-radius: 50%;
   background: var(--glow-bright);
   box-shadow:
-    0 0 6px 1px rgba(169, 236, 255, 0.9),
-    0 0 16px 4px rgba(79, 209, 255, 0.55);
+    0 0 6px 1px rgba(169, 224, 255, 0.9),
+    0 0 16px 4px rgba(46, 134, 201, 0.55);
   animation: pulse-dot 3.2s ease-in-out infinite;
 }
 
@@ -157,7 +231,7 @@ nav.site-nav a.active::after {
   width: 100%;
   height: 1px;
   background: linear-gradient(90deg, var(--glow), var(--glow-bright));
-  box-shadow: 0 0 8px 1px rgba(79, 209, 255, 0.85);
+  box-shadow: 0 0 8px 1px rgba(46, 134, 201, 0.85);
 }
 
 /* ---------- main / footer ---------- */
@@ -214,16 +288,16 @@ main {
 }
 
 .work-row:hover {
-  background: linear-gradient(120deg, rgba(79, 209, 255, 0.07), transparent 70%);
+  background: linear-gradient(120deg, rgba(46, 134, 201, 0.08), transparent 70%);
   box-shadow:
     0 0 0 1px var(--line-glow),
-    0 12px 32px -16px rgba(79, 209, 255, 0.35);
+    0 12px 32px -16px rgba(46, 134, 201, 0.35);
   transform: translateX(2px);
 }
 
 .work-row:hover::before {
   background: var(--glow-bright);
-  box-shadow: 0 0 10px 2px rgba(79, 209, 255, 0.9);
+  box-shadow: 0 0 10px 2px rgba(46, 134, 201, 0.9);
   width: 2px;
 }
 
@@ -250,7 +324,7 @@ main {
 
 .work-row:hover .work-title {
   color: #fff;
-  text-shadow: 0 0 18px rgba(79, 209, 255, 0.35);
+  text-shadow: 0 0 18px rgba(46, 134, 201, 0.4);
 }
 
 .work-excerpt {
@@ -279,7 +353,7 @@ main {
 
 .back-link:hover {
   color: var(--glow-bright);
-  text-shadow: 0 0 12px rgba(79, 209, 255, 0.5);
+  text-shadow: 0 0 12px rgba(46, 134, 201, 0.55);
 }
 
 .work-header .work-kind {
@@ -292,7 +366,7 @@ main {
   font-size: 2.1rem;
   line-height: 1.25;
   margin: 10px 0 18px;
-  text-shadow: 0 0 30px rgba(79, 209, 255, 0.18);
+  text-shadow: 0 0 30px rgba(46, 134, 201, 0.2);
 }
 
 .title-rule {
@@ -300,7 +374,7 @@ main {
   height: 2px;
   border-radius: 2px;
   background: linear-gradient(90deg, var(--glow-bright), var(--glow), transparent);
-  box-shadow: 0 0 12px rgba(79, 209, 255, 0.8);
+  box-shadow: 0 0 12px rgba(46, 134, 201, 0.8);
   margin-bottom: 32px;
   animation: breathe 5s ease-in-out infinite;
 }

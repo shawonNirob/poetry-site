@@ -3,13 +3,17 @@ import { getWorksByKind } from '../data/works';
 
 const KIND_BY_PATH = {
   poems: 'poem',
-  prose: 'prose'
+  prose: 'prose',
+  fiction: 'fiction',
+  document: 'document'
 };
 
 const LABEL_BY_PATH = {
   all: 'everything',
   poems: 'poems',
-  prose: 'prose'
+  prose: 'prose',
+  fiction: 'fiction',
+  document: 'document'
 };
 
 export default function Home({ section = 'all' }) {
