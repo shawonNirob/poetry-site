@@ -26,6 +26,18 @@ const proseFiles = import.meta.glob('/src/content/prose/*.md', {
   import: 'default'
 });
 
+const fictionFiles = import.meta.glob('/src/content/fiction/*.md', {
+  eager: true,
+  query: '?raw',
+  import: 'default'
+});
+
+const documentFiles = import.meta.glob('/src/content/document/*.md', {
+  eager: true,
+  query: '?raw',
+  import: 'default'
+});
+
 function parseFrontmatter(raw) {
   const match = raw.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);
   if (!match) return { meta: {}, body: raw.trim() };
@@ -59,7 +71,7 @@ function loadFiles(files, kind) {
   });
 }
 
-export const works = [...loadFiles(poemFiles, 'poem'), ...loadFiles(proseFiles, 'prose')];
+export const works = [...loadFiles(poemFiles, 'poem'), ...loadFiles(proseFiles, 'prose'), ...loadFiles(proseFiles, 'fiction'), ...loadFiles(proseFiles, 'document')];
 
 export const getWorkBySlug = (slug) => works.find((w) => w.slug === slug);
 
