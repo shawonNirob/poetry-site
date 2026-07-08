@@ -15,7 +15,7 @@ export default function Header() {
       <div className="container">
         <NavLink to="/" className="brand">
           <span className="brand-mark" aria-hidden="true" />
-          <span className="brand-name">earth</span>
+          <span className="brand-name">Earth</span>
         </NavLink>
         <nav className="site-nav" aria-label="Primary">
           {links.map((link) => (
