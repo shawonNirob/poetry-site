@@ -4,6 +4,8 @@ const links = [
   { to: '/', label: 'all', end: true },
   { to: '/poems', label: 'poems' },
   { to: '/prose', label: 'prose' },
+  { to: '/fiction', label: 'fiction' },
+  { to: '/document', label: 'document' },
   { to: '/about', label: 'about' }
 ];
 
