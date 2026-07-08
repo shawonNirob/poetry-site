@@ -9,6 +9,13 @@ function formatDate(dateStr) {
   });
 }
 
+const routes = {
+  poem: '/poems',
+  prose: '/prose',
+  fiction: '/fiction',
+  document: '/documents'
+};
+
 export default function WorkPage() {
   const { slug } = useParams();
   const work = getWorkBySlug(slug);
@@ -16,16 +23,22 @@ export default function WorkPage() {
   if (!work) {
     return (
       <div className="container">
-        <p className="empty-state">This one doesn&rsquo;t exist. Maybe it hasn&rsquo;t been written yet.</p>
-        <Link to="/" className="back-link">&larr; back</Link>
+        <p className="empty-state">
+          This one doesn&rsquo;t exist. Maybe it hasn&rsquo;t been written yet.
+        </p>
+        <Link to="/" className="back-link">
+          &larr; back
+        </Link>
       </div>
     );
   }
 
+  const backRoute = routes[work.kind] || '/';
+
   return (
     <div className="container">
-      <Link to={work.kind === 'poem' ? '/poems' : '/prose'} className="back-link">
-        &larr; back to {work.kind === 'poem' ? 'poems' : 'prose'}
+      <Link to={backRoute} className="back-link">
+        &larr; back to {work.kind}
       </Link>
 
       <div className="work-header">
@@ -35,11 +48,17 @@ export default function WorkPage() {
 
       <div className="title-rule" aria-hidden="true" />
 
-      <div className={`work-body ${work.kind === 'prose' ? 'prose' : ''}`}>
+      <div
+        className={`work-body ${
+          ['prose', 'fiction', 'document'].includes(work.kind) ? 'prose' : ''
+        }`}
+      >
         {work.body.trim()}
       </div>
 
-      <p className="work-footer-meta">published {formatDate(work.date)}</p>
+      <p className="work-footer-meta">
+        published {formatDate(work.date)}
+      </p>
     </div>
   );
 }
