@@ -13,7 +13,7 @@ const routes = {
   poem: '/poems',
   prose: '/prose',
   fiction: '/fiction',
-  document: '/documents'
+  document: '/document'
 };
 
 export default function WorkPage() {

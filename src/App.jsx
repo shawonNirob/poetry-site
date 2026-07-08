@@ -14,8 +14,12 @@ export default function App() {
           <Route path="/" element={<Home section="all" />} />
           <Route path="/poems" element={<Home section="poems" />} />
           <Route path="/prose" element={<Home section="prose" />} />
+          <Route path="/fiction" element={<Home section="fiction" />} />
+          <Route path="/document" element={<Home section="document" />} />
           <Route path="/poems/:slug" element={<WorkPage />} />
           <Route path="/prose/:slug" element={<WorkPage />} />
+          <Route path="/fiction/:slug" element={<WorkPage />} />
+          <Route path="/document/:slug" element={<WorkPage />} />
           <Route path="/about" element={<About />} />
         </Routes>
       </main>

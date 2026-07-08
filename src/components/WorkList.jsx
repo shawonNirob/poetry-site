@@ -8,6 +8,13 @@ function formatDate(dateStr) {
   });
 }
 
+const KIND_TO_PATH = {
+  poem: 'poems',
+  prose: 'prose',
+  fiction: 'fiction',
+  document: 'document'
+};
+
 export default function WorkList({ works, label }) {
   if (!works.length) {
     return <p className="empty-state">Nothing here yet.</p>;
@@ -19,7 +26,7 @@ export default function WorkList({ works, label }) {
       <ul className="work-list">
         {works.map((work) => (
           <li key={work.slug} className="work-row">
-            <Link to={`/${work.kind === 'poem' ? 'poems' : 'prose'}/${work.slug}`} className="work-link">
+              <Link to={`/${KIND_TO_PATH[work.kind]}/${work.slug}`} className="work-link">
               <span className="work-kind">{work.kind}</span>
               <h2 className="work-title">{work.title}</h2>
               <p className="work-excerpt">{work.excerpt}</p>
