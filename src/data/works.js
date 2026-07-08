@@ -71,7 +71,12 @@ function loadFiles(files, kind) {
   });
 }
 
-export const works = [...loadFiles(poemFiles, 'poem'), ...loadFiles(proseFiles, 'prose'), ...loadFiles(proseFiles, 'fiction'), ...loadFiles(proseFiles, 'document')];
+export const works = [
+  ...loadFiles(poemFiles, 'poem'),
+  ...loadFiles(proseFiles, 'prose'),
+  ...loadFiles(fictionFiles, 'fiction'),
+  ...loadFiles(documentFiles, 'document')
+];
 
 export const getWorkBySlug = (slug) => works.find((w) => w.slug === slug);
 
